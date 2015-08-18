@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .container 
+    #ticket.ticket
+      img(src="/images/ticket.jpg")
+      .ticket-left-name
+        h2 #{ pageData.passenger }
+      .ticket-left-qty
+        h4 #{ pageData.qty }
+      .ticket-left-seat
+        h4 #{ pageData.seat }
+      .ticket-right-name
+        h2 #{ pageData.passenger }
+      .ticket-right-qty
+        h4 #{ pageData.qty }
+      .ticket-right-seat
+        h4 #{ pageData.seat }
+    .row
+      p
+        button.btn.btn-primary.btn-lg(onclick='window.print();')
+          span.glyphicon.glyphicon-print
+
+    // jQuery
+    //script(src='/javascripts/jquery.js')
+    script(src='/javascripts/html2canvas.js')
+    script(src='/javascripts/ticketrender.js')
+

@@ -1,0 +1,341 @@
+extends layout
+
+block content
+    #milesCounter.modal.fade
+      .modal-dialog
+        .modal-content.text-center
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4.modal-title= __("Event count your miles")
+          .modal-body
+            .container
+              .row
+                .col-sm-6
+                  h3= __("Choose first date of your friendship") 
+                  input#mileDate(type='text')
+                  #calcResults(style='display: none')
+                    h3= __("You have spend together")
+                    h3
+                      span#milesTotal.label.label-success
+                    = __("Miles/days")
+                  
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal')= __("Close")
+
+    #photoUp.modal.fade
+      .modal-dialog
+        .modal-content.text-center
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4.modal-title= __("Add files")
+          .modal-body
+            span.btn.btn-success.fileinput-button
+              i.glyphicon.glyphicon-plus
+              span= __("Add files")
+              input#fileupload(type='file', name='files[]', data-url='/upload', multiple='')
+            #progress
+              .progress
+                .progress-bar(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal')= __("Close")
+
+    // Navigation
+    nav.navbar.navbar-custom.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
+            i.fa.fa-bars
+          a.navbar-brand.page-scroll(href='#top')= __("DA wedding")
+        // Collect the nav links, forms, and other content for toggling
+        .collapse.navbar-collapse.navbar-right.navbar-main-collapse
+          ul.nav.navbar-nav
+            // Hidden li included to remove active class from about link when scrolled up past about section
+            li.hidden
+              a(href='#top')
+            li
+              a.page-scroll(href='#about')= __("about")
+            li
+              a.page-scroll(href='#services')= __("events")
+            li
+              a.page-scroll(href='#portfolio')= __("galery")
+            li
+              a.page-scroll(href='#contact')= __("contact")
+            li.dropdown.menu-item
+              a.dropdown-toggle(href='#', data-toggle='dropdown') #{locale}
+              ul.dropdown-menu
+                li
+                  a(href='/setlocale/en') en
+                li
+                  a(href='/setlocale/ru') ru
+
+    // Intro Header
+    // Header
+    header#top.header
+      .text-vertical-center
+        h2  #{ pageData.guest }
+        h2= __("Invite You")
+        h2= __("on our wedding")  
+        h3
+          | 30 
+          = __("August") 
+          |  2015
+        #CDT
+        br
+        a.btn.btn-dark.btn-lg(href='#invitation')= __("Find Out More")
+
+    // Invitation
+    section#invitation.invitation.bg-primary.content-section
+      .container
+        .row.text-center
+          .embed-responsive.embed-responsive-16by9(align='center')
+            video#invitevideo.embed-responsive-item(controls='')
+              source(src='/video/mian_2015.mp4', type='video/mp4')
+
+    // About
+    section#about.about.content-section
+      .container
+        .row
+          .col-lg-12.text-center
+            h2.section-heading= __("about")
+            h3.section-subheading.text-muted= __("How we met each other")
+            br
+        .row
+          .col-lg-12
+            ul.timeline
+              li
+                .timeline-image
+                  img.img-circle.img-responsive(src='/images/about/1.jpg', alt='')
+                .timeline-panel
+                  .timeline-heading
+                    h4=  __("December") 
+                      |  2005
+                    h4.subheading= __("First acquaintance")
+                  .timeline-body
+                    p.text-muted=  __("First acquaintance story")
+              li.timeline-inverted
+                .timeline-image
+                  img.img-circle.img-responsive(src='/images/about/2.jpg', alt='')
+                .timeline-panel
+                  .timeline-heading
+                    h4=  __("August") 
+                      |  2005
+                    h4.subheading=  __("Start dating")
+                  .timeline-body
+                    p.text-muted=  __("Start dating story")
+              li
+                .timeline-image
+                  img.img-circle.img-responsive(src='/images/about/3.jpg', alt='')
+                .timeline-panel
+                  .timeline-heading
+                    h4= __("May")    
+                      |  2015
+                    h4.subheading=  __("Marriage proposal")
+                  .timeline-body
+                    p.text-muted=  __("Marriage proposal story")
+              li.timeline-inverted
+                .timeline-image
+                  h4
+                    = __("Be Part")
+                    br
+                    = __("Of Our Story")
+                    br
+                    | 30 
+                    = __("August")
+                    |  2015
+    // Events
+    // The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/
+    section#services.services.bg-primary.content-section
+      .container
+        .row.text-center
+          .col-lg-10.col-lg-offset-1
+            h2= __("Our Events")
+            hr.small
+            .row
+              .col-md-3.col-sm-6
+                .service-item
+                  span.fa-stack.fa-4x
+                    i.fa.fa-circle.fa-stack-2x
+                    i.fa.fa-cloud.fa-stack-1x.text-primary
+                  h4
+                    strong= __("Event best photo")
+                  p= __("Event best photo info")
+                  a.btn.btn-light(type='button', data-toggle='modal', data-target='#photoUp')= __("Photo search")
+              .col-md-3.col-sm-6
+                .service-item
+                  span.fa-stack.fa-4x
+                    i.fa.fa-circle.fa-stack-2x
+                    i.fa.fa-compass.fa-stack-1x.text-primary
+                  h4
+                    strong= __("Event best video greeting")
+                  p= __("Event best video greeting info")
+                  a.btn.btn-light(type='button', data-toggle='modal', data-target='#photoUp')= __("Participate")
+              .col-md-3.col-sm-6
+                .service-item
+                  span.fa-stack.fa-4x
+                    i.fa.fa-circle.fa-stack-2x
+                    i.fa.fa-flask.fa-stack-1x.text-primary
+                  h4
+                    strong= __("Event Book your place")
+                  p= __("Event Book your place info")
+                  form(method='POST', action='/tickets')
+                    input(type='hidden', name='passenger', value='#{ pageData.guest }')
+                    input(type='hidden', name='qty', value='#{ pageData.amount }')
+                    input(type='hidden', name='seat', value='')
+                    button.btn.btn-default(type='submit')= __("Get ticket")
+              .col-md-3.col-sm-6
+                .service-item
+                  span.fa-stack.fa-4x
+                    i.fa.fa-circle.fa-stack-2x
+                    i.fa.fa-shield.fa-stack-1x.text-primary
+                  h4
+                    strong= __("Event count your miles")
+                  p= __("Event count your miles info")
+                  button.btn.btn-light(type='button', data-toggle='modal', data-target='#milesCounter')= __("Participate")
+    // Callout
+    //aside.callout
+    //  .text-vertical-center
+    //    h1= __("Result of Events") 
+    // Galery
+    section#portfolio.portfolio.content-section
+      .container
+        // Root element of PhotoSwipe. Must have class pswp.
+        .pswp(tabindex='-1', role='dialog', aria-hidden='true')
+          //      
+            Background of PhotoSwipe.
+            It's a separate element as animating opacity is faster than rgba().
+          .pswp__bg 
+          // Slides wrapper with overflow:hidden.
+          .pswp__scroll-wrap
+            //            
+              Container that holds slides.
+              PhotoSwipe keeps only 3 of them in the DOM to save memory.
+              Don't modify these 3 pswp__item elements, data is added later on.
+            .pswp__container
+              .pswp__item   
+              .pswp__item
+              .pswp__item
+            // Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.
+            .pswp__ui.pswp__ui--hidden
+              .pswp__top-bar
+                // Controls are self-explanatory. Order can be changed.
+                .pswp__counter
+                button.pswp__button.pswp__button--close(title='Close (Esc)')
+                button.pswp__button.pswp__button--share(title='Share')
+                button.pswp__button.pswp__button--fs(title='Toggle fullscreen')
+                button.pswp__button.pswp__button--zoom(title='Zoom in/out')
+                // Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR
+                // element will get class pswp__preloader--active when preloader is running
+                .pswp__preloader
+                  .pswp__preloader__icn
+                    .pswp__preloader__cut
+                      .pswp__preloader__donut
+              .pswp__share-modal.pswp__share-modal--hidden.pswp__single-tap
+                .pswp__share-tooltip
+              button.pswp__button.pswp__button--arrow--left(title='Previous (arrow left)')
+              button.pswp__button.pswp__button--arrow--right(title='Next (arrow right)')
+              .pswp__caption
+                .pswp__caption__center
+        .row
+          .col-lg-10.col-lg-offset-1.text-center
+            h2 Our Foto
+            hr.small
+            .row
+              .col-md-6
+                .portfolio-item
+                  a
+                    img.img-portfolio.img-responsive(src='/images/portfolio-1.jpg')
+              .col-md-6
+                .portfolio-item
+                  a
+                    img.img-portfolio.img-responsive(src='/images/portfolio-2.jpg')
+              .col-md-6
+                .portfolio-item
+                  a
+                    img.img-portfolio.img-responsive(src='/images/portfolio-3.jpg')
+              .col-md-6
+                .portfolio-item
+                  a
+                    img.img-portfolio.img-responsive(src='/images/portfolio-4.jpg')
+            //a.btn.btn-dark(href='#') View More Items
+    // Call to Action
+    aside.call-to-action.bg-primary
+      .container
+        .row
+          .col-lg-12.text-center
+            //h3= __("Voting for children")
+            //a.btn.btn-lg.btn-light(href='#')
+            //  span.fa.fa-venus
+            //  = __("Girl")
+            //a.btn.btn-lg.btn-dark(href='#')= __("Boy")
+            h3= __("List of needed things")
+            ul.list-unstyled
+              li
+                h4= __("QR Code Readers")
+              li
+                a(href='https://play.google.com/store/apps/details?id=com.google.zxing.client.android&hl=en')
+                  img.img-rounded(src='http://icons.iconarchive.com/icons/carlosjj/google-jfk/128/android-icon.png', alt='')
+                a(href='https://itunes.apple.com/us/app/scanlife-barcode-qr-reader/id285324287?mt=8')
+                  img.img-rounded(src='http://techhelpkb.com/wp-content/uploads/2014/09/Apple-logo-icon-Aluminum.png', alt='')
+              li
+                h4= __("Your good mood")
+              li
+                img.img-rounded(src='http://www.i2clipart.com/cliparts/f/a/d/2/clipart-lets-party-fad2.png', alt='')
+    // Map
+    section#contact.map.content-section
+      iframe(width='100%', height='100%', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5230.483874270787!2d30.425809916061613!3d50.44426891266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xe0a94ffe6e0e6a53!2sORLY+PARK!5e0!3m2!1sen!2sus!4v1436770423846')
+      br
+      small
+        a(href='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5230.483874270787!2d30.425809916061613!3d50.44426891266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xe0a94ffe6e0e6a53!2sORLY+PARK!5e0!3m2!1sen!2sus!4v1436770423846')
+    // Footer
+    footer
+      .container
+        .row
+          .col-lg-10.col-lg-offset-1.text-center
+            h4
+              strong= __("Meeting point")
+            strong
+              = __("Restaurant") 
+              a(href='http://orlypark.com.ua/')  ORLY PARK
+            br
+            = __("Address")
+            br
+            = __("Address2")   
+            ul.list-unstyled
+              li
+                i.fa.fa-phone.fa-fw
+                br
+                | +38 044 300 03 30 
+                br
+                | +38 099 554 37 77
+                br 
+                | +38 096 014 37 77 
+                br
+                | +38 063 391 37 77 
+              li
+                i.fa.fa-envelope-o.fa-fw
+                br
+                a(href='mailto:d.rybachuk@gmail.com') d.rybachuk@gmail.com
+            br
+            hr.small
+            - var today = new Date();
+            p.text-muted Copyright © Dmitriy Rybachuk #{today.getFullYear()}
+
+    // jQuery
+    script(src='/javascripts/jquery.js')
+    // JQuery UI
+    script(src='/javascripts/jquery-ui.min.js')
+    // Bootstrap Core JavaScript
+    script(src='/javascripts/bootstrap.min.js')
+    //  Plugin JavaScript
+    script(src='/javascripts/jquery.easing.min.js')
+    // Custom Theme JavaScript
+    script(src='/javascripts/main_menu.js')
+    // Timer
+    script(src='/javascripts/mywedding.js')
+    //Photo upload
+    script(src='/javascripts/jquery.fileupload.js')
+    script(src='/javascripts/jquery.iframe-transport.js')
+    script(src='/javascripts/jquery.ui.widget.js')
+
